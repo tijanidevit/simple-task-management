@@ -1,0 +1,22 @@
+{
+    "sourceFile": "app/Http/Controllers/TaskNoteController.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1695212288984,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1695212294971,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n \n     public function store(StoreRequest $request) : Response {\n         try {\n             $response = $this->taskNoteService->addNew($request->validated());\n-            return $this->successResponse(\"Task added successfully\", $response, 201);\n+            return $this->successResponse(\"Note added successfully\", $response, 201);\n         } catch (Exception $ex) {\n             Log::error($ex->getMessage());\n             return $this->errorResponse();\n         }\n"
+                }
+            ],
+            "date": 1695212288984,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Http\\Controllers;\n\nuse App\\Http\\Requests\\TaskNote\\StoreRequest;\nuse App\\Services\\TaskNoteService;\nuse App\\Traits\\ResponseTrait;\nuse Exception;\nuse Illuminate\\Http\\Response;\nuse Illuminate\\Support\\Facades\\Log;\n\nclass TaskNoteController extends Controller\n{\n    use ResponseTrait;\n    public function __construct(protected TaskNoteService $taskNoteService) {\n\n    }\n\n\n    public function store(StoreRequest $request) : Response {\n        try {\n            $response = $this->taskNoteService->addNew($request->validated());\n            return $this->successResponse(\"Task added successfully\", $response, 201);\n        } catch (Exception $ex) {\n            Log::error($ex->getMessage());\n            return $this->errorResponse();\n        }\n    }\n\n}\n"
+        }
+    ]
+}

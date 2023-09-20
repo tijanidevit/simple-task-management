@@ -3,11 +3,19 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 2,
             "patches": [
                 {
                     "date": 1695211947436,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1695212336221,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,10 @@\n      */\n     public function toArray(Request $request): array\n     {\n         return [\n-            'projectId' => $this->id,\n+            'noteId' => $this->id,\n+            'taskId' => $this->task_id\n             'note' => $this->note\n         ];\n     }\n }\n"
+                },
+                {
+                    "date": 1695212336338,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,23 @@\n+<?php\n+\n+namespace App\\Http\\Resources;\n+\n+use Illuminate\\Http\\Request;\n+use Illuminate\\Http\\Resources\\Json\\JsonResource;\n+\n+class TaskNoteResource extends JsonResource\n+{\n+    /**\n+     * Transform the resource into an array.\n+     *\n+     * @return array<string, mixed>\n+     */\n+    public function toArray(Request $request): array\n+    {\n+        return [\n+            'noteId' => $this->id,\n+            'taskId' => $this->task_id\n+            'note' => $this->note\n+        ];\n+    }\n+}\n"
                 }
             ],
             "date": 1695211947436,

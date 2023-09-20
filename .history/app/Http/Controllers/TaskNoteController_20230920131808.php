@@ -20,7 +20,7 @@ class TaskNoteController extends Controller
     public function store(StoreRequest $request) : Response {
         try {
             $response = $this->taskNoteService->addNew($request->validated());
-            return $this->successResponse("Note added successfully", $response, 201);
+            return $this->successResponse("Task added successfully", $response, 201);
         } catch (Exception $ex) {
             Log::error($ex->getMessage());
             return $this->errorResponse();

@@ -16,7 +16,7 @@ class TaskNoteResource extends JsonResource
     {
         return [
             'noteId' => $this->id,
-            'taskId' => $this->task_id,
+            'taskId' => $this->task_id
             'note' => $this->note
         ];
     }
