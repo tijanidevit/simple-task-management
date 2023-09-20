@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class TaskCommentResource extends JsonResource
+class TaskNote extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -14,6 +14,10 @@ class TaskCommentResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'projectId' => $this->id,
+            'note' => $this->note,
+            'notes' => new TaskResource($this->whenLoaded('notes')),
+        ];
     }
 }

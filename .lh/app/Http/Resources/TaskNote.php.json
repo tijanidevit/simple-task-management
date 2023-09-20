@@ -1,0 +1,22 @@
+{
+    "sourceFile": "app/Http/Resources/TaskNote.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1695211430482,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1695211926870,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,8 @@\n     public function toArray(Request $request): array\n     {\n         return [\n             'projectId' => $this->id,\n-            'note' => $this->note,\n-            'notes' => new TaskResource($this->whenLoaded('notes')),\n+            'note' => $this->note\n         ];\n     }\n }\n"
+                }
+            ],
+            "date": 1695211430482,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Http\\Resources;\n\nuse Illuminate\\Http\\Request;\nuse Illuminate\\Http\\Resources\\Json\\JsonResource;\n\nclass TaskNote extends JsonResource\n{\n    /**\n     * Transform the resource into an array.\n     *\n     * @return array<string, mixed>\n     */\n    public function toArray(Request $request): array\n    {\n        return [\n            'projectId' => $this->id,\n            'note' => $this->note,\n            'notes' => new TaskResource($this->whenLoaded('notes')),\n        ];\n    }\n}\n"
+        }
+    ]
+}

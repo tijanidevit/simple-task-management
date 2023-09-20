@@ -21,7 +21,7 @@ class ProjectController extends Controller
     public function index(FilterRequest $request) : Response {
         try {
             $response = $this->projectService->getAll($request->validated());
-            return $this->successResponse("All projects retrieved successfully", $response, 200);
+            return $this->successResponse("All projects retrieved successfully", $response);
         } catch (Exception $ex) {
             Log::error($ex->getMessage());
             return $this->errorResponse();
@@ -35,6 +35,16 @@ class ProjectController extends Controller
         } catch (Exception $ex) {
             Log::error($ex->getMessage());
             return $this->errorResponse();
+        }
+    }
+
+    public function show(int $projectId) : Response {
+        try {
+            $response = $this->projectService->getOne($projectId);
+            return $this->successResponse("Project retrieved successfully", $response);
+        } catch (Exception $ex) {
+            Log::error($ex->getMessage());
+            return $this->errorResponse($ex->getMessage());
         }
     }
 }

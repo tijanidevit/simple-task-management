@@ -2,7 +2,8 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProjectController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\TaskController;
+use App\Http\Controllers\TaskNoteController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,8 +24,21 @@ Route::prefix('auth')->group(function () {
 
 Route::middleware(['auth:sanctum'])->group(function () {
 
-    Route::prefix('projects')->as('project')->group(function () {
+    Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+
+    Route::prefix('projects')->as('project.')->group(function () {
         Route::get('', [ProjectController::class, 'index'])->name('index');
         Route::post('new', [ProjectController::class, 'store'])->name('store');
+        Route::get('{projectId}', [ProjectController::class, 'show'])->name('show');
+    });
+
+    Route::prefix('tasks')->as('task.')->group(function () {
+        Route::get('', [TaskController::class, 'index'])->name('index');
+        Route::post('new', [TaskController::class, 'store'])->name('store');
+        Route::get('{taskId}', [TaskController::class, 'show'])->name('show');
+    });
+
+    Route::prefix('notes')->as('note.')->group(function () {
+        Route::post('new', [TaskNoteController::class, 'store'])->name('store');
     });
 });

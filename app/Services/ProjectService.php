@@ -32,4 +32,17 @@ class ProjectService
         return ProjectResource::collection($projects);
     }
 
+    public function getOne(int $projectId) : ProjectResource
+    {
+        $project = $this->project->where('user_id', auth()->id())
+                    ->where('id', $projectId)
+                    ->with('tasks')->first();
+
+        if (!$project) {
+            throw new Exception("Project not found");
+        }
+
+        return new ProjectResource($project);
+    }
+
 }

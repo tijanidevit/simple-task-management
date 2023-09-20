@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Project;
+namespace App\Http\Requests\TaskNote;
 
 use App\Enums\StatusEnum;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class FilterRequest extends FormRequest
+class StoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,9 +26,8 @@ class FilterRequest extends FormRequest
     public function rules()
     {
         return [
-            'start_time' => 'sometimes|date|date_format:Y-m-d H:i:s',
-            'end_time' => 'sometimes|date|date_format:Y-m-d H:i:s',
-            'status' => ['sometimes', Rule::in([StatusEnum::PENDING, StatusEnum::IN_PROGRESS, StatusEnum::COMPLETE])],
+            'task_id' => 'required|exists:tasks,id',
+            'note' => 'required|string'
         ];
     }
 

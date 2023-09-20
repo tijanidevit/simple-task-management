@@ -21,7 +21,7 @@ class ProjectResource extends JsonResource
             'startTime' => $this->start_time,
             'endTime' => $this->end_time,
             'status' => $this->status,
-            'tasks' => TaskResource::collection($this->whenLoaded('tasks')),
+            'tasks' => new TaskResource($this->whenLoaded('tasks')),
         ];
     }
 }

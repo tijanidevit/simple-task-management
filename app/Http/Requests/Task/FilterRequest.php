@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Extraction;
+namespace App\Http\Requests\Task;
 
-use App\Enums\UserRoleEnum;
+use App\Enums\StatusEnum;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class ExtractRequest extends FormRequest
+class FilterRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +26,10 @@ class ExtractRequest extends FormRequest
     public function rules()
     {
         return [
-            'image' => 'required|file|mimetypes:image/png,image/jpeg,image/jpg|max:5120',
+            'start_time' => 'sometimes|date|date_format:Y-m-d H:i:s',
+            'end_time' => 'sometimes|date|date_format:Y-m-d H:i:s',
+            'status' => ['sometimes', Rule::in([StatusEnum::PENDING, StatusEnum::IN_PROGRESS, StatusEnum::COMPLETE])],
         ];
     }
+
 }

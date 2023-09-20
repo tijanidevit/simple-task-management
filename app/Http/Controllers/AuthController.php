@@ -16,9 +16,10 @@ class AuthController extends Controller
 
     }
 
-    // public function logout() : Response {
-    //     auth()->logout();
-    // }
+    public function logout() : Response {
+        auth()->logout();
+        return $this->successResponse("Logout successful");
+    }
 
     public function login(LoginRequest $request) : Response {
         try {
