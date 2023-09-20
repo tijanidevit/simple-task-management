@@ -22,4 +22,29 @@ trait ResponseTrait{
             'message' => $message,
         ], $statusCode);
     }
+
+
+
+    public function notFoundResponse()
+    {
+        return response([
+            'success' => false,
+            'message' => "Resource not found",
+        ], 404);
+    }
+
+    public function invalidEndpointResponse()
+    {
+        return response([
+            'success' => false,
+            'message' => "Endpoint not found",
+        ], 404);
+    }
+    public function invalidMethodResponse()
+    {
+        return response([
+            'success' => false,
+            'message' => "Invalid method for endpoint",
+        ], 405);
+    }
 }

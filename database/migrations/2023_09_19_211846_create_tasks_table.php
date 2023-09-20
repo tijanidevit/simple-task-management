@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\StatusEnum;
 use App\Models\Project;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -19,7 +20,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->timestamp('start_time');
             $table->timestamp('end_time')->default(now());
-            $table->string('status');
+            $table->string('status')->default(StatusEnum::PENDING);
             $table->timestamps();
         });
     }

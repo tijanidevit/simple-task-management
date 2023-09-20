@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProjectController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,5 +22,9 @@ Route::prefix('auth')->group(function () {
 });
 
 Route::middleware(['auth:sanctum'])->group(function () {
-    Route::post('extract', [ExtractionController::class, 'extract'])->name('extract');
+
+    Route::prefix('projects')->as('project')->group(function () {
+        Route::get('', [ProjectController::class, 'index'])->name('index');
+        Route::post('new', [ProjectController::class, 'store'])->name('store');
+    });
 });

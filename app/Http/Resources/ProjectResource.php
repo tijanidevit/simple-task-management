@@ -18,6 +18,10 @@ class ProjectResource extends JsonResource
             'projectId' => $this->id,
             'title' => $this->title,
             'description' => $this->description,
+            'startTime' => $this->start_time,
+            'endTime' => $this->end_time,
+            'status' => $this->status,
+            'tasks' => new TaskResource($this->whenLoaded('tasks')),
         ];
     }
 }

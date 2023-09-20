@@ -32,7 +32,7 @@ class AuthController extends Controller
     public function register(RegisterRequest $request) : Response {
         try {
             $user = $this->authService->register($request->validated());
-            return $this->successResponse("Login successful", $user);
+            return $this->successResponse("Registration successful", $user);
         } catch (Exception $ex) {
             return $this->errorResponse($ex->getMessage(), 422);
         }
