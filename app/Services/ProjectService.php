@@ -45,4 +45,27 @@ class ProjectService
         return new ProjectResource($project);
     }
 
+
+    public function update(array $data): ProjectResource
+    {
+        $project = $this->project->where('id', $data['id'])->update($data);
+        return new ProjectResource($project);
+    }
+
+    public function delete(int $projectId) : void
+    {
+        $project = $this->project->where('user_id', auth()->id())
+                    ->where('id', $projectId)
+                    ->with('tasks')->first();
+
+
+        if (!$project) {
+            throw new Exception("Project not found");
+        }
+
+        $project->tasks()->delete();
+        $project->delete();
+        //could have used database cascade in the migration
+    }
+
 }

@@ -30,15 +30,21 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('', [ProjectController::class, 'index'])->name('index');
         Route::post('new', [ProjectController::class, 'store'])->name('store');
         Route::get('{projectId}', [ProjectController::class, 'show'])->name('show');
+        Route::patch('update', [ProjectController::class, 'update'])->name('update');
+        Route::delete('{projectId}', [ProjectController::class, 'delete'])->name('delete');
     });
 
     Route::prefix('tasks')->as('task.')->group(function () {
         Route::get('', [TaskController::class, 'index'])->name('index');
         Route::post('new', [TaskController::class, 'store'])->name('store');
         Route::get('{taskId}', [TaskController::class, 'show'])->name('show');
+        Route::patch('update', [TaskController::class, 'update'])->name('update');
+        Route::delete('{taskId}', [TaskController::class, 'delete'])->name('delete');
     });
 
     Route::prefix('notes')->as('note.')->group(function () {
         Route::post('new', [TaskNoteController::class, 'store'])->name('store');
+        Route::patch('update', [TaskNoteController::class, 'update'])->name('update');
+        Route::delete('{noteId}', [TaskNoteController::class, 'delete'])->name('delete');
     });
 });

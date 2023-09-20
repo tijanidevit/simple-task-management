@@ -13,11 +13,23 @@ use Illuminate\Support\Facades\Hash;
  */
 class TaskNoteService
 {
-    public function __construct(protected TaskNote $task) {
+    public function __construct(protected TaskNote $taskNote) {
     }
     public function addNew(array $data): TaskNoteResource
     {
-        $task = $this->task->create($data);
-        return new TaskNoteResource($task);
+        $taskNote = $this->taskNote->create($data);
+        return new TaskNoteResource($taskNote);
+    }
+
+
+    public function update(array $data): TaskNoteResource
+    {
+        $taskNote = $this->taskNote->where('id', $data['id'])->update($data);
+        return new TaskNoteResource($taskNote);
+    }
+
+    public function delete(int $taskNoteId) : void
+    {
+        $this->taskNote->where('id', $taskNoteId)->delete();
     }
 }

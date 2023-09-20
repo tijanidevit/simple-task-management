@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Task\FilterRequest;
 use App\Http\Requests\Task\StoreRequest;
+use App\Http\Requests\Task\UpdateRequest;
 use App\Services\TaskService;
 use App\Traits\ResponseTrait;
 use Exception;
@@ -44,6 +45,28 @@ class TaskController extends Controller
         } catch (Exception $ex) {
             Log::error($ex->getMessage());
             return $this->errorResponse($ex->getMessage(), 404);
+        }
+    }
+
+
+
+    public function update(UpdateRequest $request) : Response {
+        try {
+            $this->taskService->update($request->validated());
+            return $this->successResponse("Task updated successfully");
+        } catch (Exception $ex) {
+            Log::error($ex->getMessage());
+            return $this->errorResponse();
+        }
+    }
+
+    public function delete(int $taskId) : Response {
+        try {
+            $this->taskService->delete($taskId);
+            return $this->successResponse("Task deleted successfully");
+        } catch (Exception $ex) {
+            Log::error($ex->getMessage());
+            return $this->errorResponse($ex->getMessage());
         }
     }
 }

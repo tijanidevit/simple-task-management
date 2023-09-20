@@ -49,4 +49,29 @@ class TaskService
         return new TaskResource($task);
     }
 
+    public function update(array $data): TaskResource
+    {
+        $task = $this->task->where('id', $data['id'])->update($data);
+        return new TaskResource($task);
+    }
+
+    public function delete(int $taskId) : void
+    {
+        $task = $this->task
+            ->with('notes')
+            ->where('id', $taskId)
+            ->whereHas('project', function ($query) {
+                return $query->where('user_id', auth()->id());
+            })->first();
+
+
+        if (!$task) {
+            throw new Exception("Project not found");
+        }
+
+        $task->notes()->delete();
+        $task->delete();
+        //could have used database cascade in the migration
+    }
+
 }
